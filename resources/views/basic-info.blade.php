@@ -30,25 +30,242 @@
             <form method="POST" action="/basic-info">
                 @csrf
                 <div class="form-group">
-                    <label for="name">Nombre completo:</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese su nombre completo" required>
+                    <label for="student_name">Nombre completo:</label>
+                    <input type="text" class="form-control" id="student_name" name="student_name" placeholder="Ingrese su nombre completo" required>
                 </div>
                 <div class="form-group">
-                    <label for="code">Código estudiantil:</label>
-                    <input type="text" class="form-control" id="code" name="code" placeholder="Ingrese su código estudiantil" required>
+                    <label for="student_code">Código estudiantil:</label>
+                    <input type="text" class="form-control" id="student_code" name="student_code" placeholder="Ingrese su código estudiantil" required>
                 </div>
                 <div class="form-group">
                     <label for="faculty">Facultad a la cual pertence:</label>
-                    <input type="text" class="form-control" id="faculty" name="faculty" placeholder="Nombre de la facultad" required>
+                    <!-- <input type="text" class="form-control" id="faculty" name="faculty" placeholder="Nombre de la facultad" required> -->
+                    <select id="faculty" name="faculty" required><option value="" disabled selected hidden>seleccione su facultad</option></select>
                 </div>
                 <div class="form-group">
                     <label for="program">Programa al que pertenece:</label>
-                    <input type="text" class="form-control" id="program" name="program" placeholder="Nombre del Programa" required>
+                    <!-- <input type="text" class="form-control" id="program" name="program" placeholder="Nombre del Programa" required> -->
+                    <select id="program" name="program" required><option value="" disabled selected hidden>seleccione su programa</option></select>
                 </div>
                 <button type="submit">Continuar</button>
             </form>
         </div>
     </div>
+    <script>
+        const PROGRAMS = [{
+                "PROGRAMA": "ADMINISTRACIÓN DE EMPRESAS (DISTANCIA)",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN DE EMPRESAS (PRESENCIAL)",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS Y HOTELERAS",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN FINANCIERA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN INDUSTRIAL",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN PÚBLICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "CONTADURÍA PÚBLICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "ECONOMÍA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "TÉCNICA PROFESIONAL EN PROCESOS DE GESTIÓN PÚBLICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "TÉCNICO PROFESIONAL EN OPERACIÓN TURÍSTICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "TECNOLOGÍA EN GESTIÓN PÚBLICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "TECNOLOGÍA EN GESTIÓN TURÍSTICA",
+                "FACULTAD": "CIENCIAS ECONÓMICAS"
+            },
+            {
+                "PROGRAMA": "BIOLOGÍA",
+                "FACULTAD": "CIENCIAS EXACTAS Y NATURALES"
+            },
+            {
+                "PROGRAMA": "MATEMÁTICAS",
+                "FACULTAD": "CIENCIAS EXACTAS Y NATURALES"
+            },
+            {
+                "PROGRAMA": "QUÍMICA",
+                "FACULTAD": "CIENCIAS EXACTAS Y NATURALES"
+            },
+            {
+                "PROGRAMA": "TÉCNICA PROFESIONAL EN PROCESOS METROLÓGICOS",
+                "FACULTAD": "CIENCIAS EXACTAS Y NATURALES"
+            },
+            {
+                "PROGRAMA": "TECNOLOGÍA EN METROLOGÍA INDUSTRIAL",
+                "FACULTAD": "CIENCIAS EXACTAS Y NATURALES"
+            },
+            {
+                "PROGRAMA": "QUÍMICA FARMACÉUTICA",
+                "FACULTAD": "CIENCIAS FARMACÉUTICAS"
+            },
+            {
+                "PROGRAMA": "FILOSOFÍA",
+                "FACULTAD": "CIENCIAS HUMANAS"
+            },
+            {
+                "PROGRAMA": "HISTORIA",
+                "FACULTAD": "CIENCIAS HUMANAS"
+            },
+            {
+                "PROGRAMA": "LENGUAS EXTRANJERAS CON ÉNFASIS EN INGLES Y FRANCÉS",
+                "FACULTAD": "CIENCIAS HUMANAS"
+            },
+            {
+                "PROGRAMA": "LINGÜÍSTICA Y LITERATURA",
+                "FACULTAD": "CIENCIAS HUMANAS"
+            },
+            {
+                "PROGRAMA": "COMUNICACIÓN SOCIAL",
+                "FACULTAD": "CIENCIAS SOCIALES Y EDUCACIÓN "
+            },
+            {
+                "PROGRAMA": "LICENCIATURA EN EDUCACIÓN CON ÉNFASIS EN CIENCIAS SOCIALES Y AMBIENTALES",
+                "FACULTAD": "CIENCIAS SOCIALES Y EDUCACIÓN "
+            },
+            {
+                "PROGRAMA": "LICENCIATURA EN EDUCACIÓN INFANTIL",
+                "FACULTAD": "CIENCIAS SOCIALES Y EDUCACIÓN "
+            },
+            {
+                "PROGRAMA": "TRABAJO SOCIAL",
+                "FACULTAD": "CIENCIAS SOCIALES Y EDUCACIÓN "
+            },
+            {
+                "PROGRAMA": "DERECHO",
+                "FACULTAD": "DERECHO Y CIENCIAS POLÍTICAS"
+            },
+            {
+                "PROGRAMA": "ENFERMERÍA",
+                "FACULTAD": "ENFERMERÍA"
+            },
+            {
+                "PROGRAMA": "ADMINISTRACIÓN DE SERVICIOS DE SALUD",
+                "FACULTAD": "ENFERMERÍA"
+            },
+            {
+                "PROGRAMA": "SEGURIDAD Y SALUD EN EL TRABAJO ",
+                "FACULTAD": "ENFERMERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA CIVIL",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA DE ALIMENTOS",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA DE SISTEMAS (DISTANCIA)",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA DE SISTEMAS (PRESENCIAL)",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA DE SOFTWARE",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "INGENIERÍA QUÍMICA",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "TÉCNICO PROFESIONAL EN OPERACIÓN DE PROCESOS PETROQUÍMICOS",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "TECNOLOGÍA EN PROCESOS INDUSTRIALES",
+                "FACULTAD": "INGENIERÍA"
+            },
+            {
+                "PROGRAMA": "MEDICINA",
+                "FACULTAD": "MEDICINA"
+            },
+            {
+                "PROGRAMA": "ODONTOLOGÍA",
+                "FACULTAD": "ODONTOLOGÍA"
+            }
+        ]
+        const FACULTIES = [
+            "CIENCIAS ECONÓMICAS",
+            "CIENCIAS EXACTAS Y NATURALES",
+            "CIENCIAS FARMACÉUTICAS",
+            "CIENCIAS HUMANAS",
+            "CIENCIAS SOCIALES Y EDUCACIÓN",
+            "DERECHO Y CIENCIAS POLÍTICAS",
+            "ENFERMERÍA",
+            "INGENIERÍA",
+            "MEDICINA",
+            "ODONTOLOGÍA"
+        ]
+        const fillFacultiesOptions = () => {
+            const facultySelect = document.getElementById('faculty');
+            FACULTIES.forEach( faculty => {
+                let option = document.createElement('option');
+                option.value = faculty
+                option.text = faculty;
+                facultySelect.add(option);
+            });
+        }
+        const fillProgramsOptions = (e) => {
+                const filter = e.target.value;
+                console.log(filter)
+                const programSelect = document.getElementById('program');
+                cleanselect(programSelect)
+                let option = document.createElement('option');
+                    option.value = "";
+                    option.text = 'seleccione su programa';
+                    option.setAttribute('disabled', '');
+                    option.setAttribute('selected', '');
+                    option.setAttribute('hidden', '');
+                    programSelect.add(option);
+                programsFiltered = PROGRAMS.filter(program => program.FACULTAD === filter)
+                programsFiltered.forEach( program => {
+                    let option = document.createElement('option');
+                    option.value = program.PROGRAMA;
+                    option.text = program.PROGRAMA;
+                    programSelect.add(option);
+                });
+        }
+        function cleanselect(select){
+            for (let i = select.options.length; i >= 0; i--) {
+                select.remove(i);
+            }
+        }
+        window.onload = function() {
+            fillFacultiesOptions()
+            const facultySelect = document.getElementById('faculty');
+            facultySelect.addEventListener('change', e => {
+                fillProgramsOptions(e)
+            })
+        };
+    </script>
 </body>
-
 </html>

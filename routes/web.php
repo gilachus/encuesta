@@ -30,12 +30,17 @@ Route::post('/checkemail', function (Request $request) {
     }
     if (filter_var($student_email, FILTER_VALIDATE_EMAIL) && strpos($student_email, 'unicartagena.edu.co')) {
         session()->put('student_email', $student_email);
-        return view('basic-info');
+        return redirect('/basic-info');
     } else {
         session()->flash('mensaje', 'No parece un correo institucional');
         return redirect('/');
     }
 });
+
+Route::get('/basic-info', function () {
+    return view('basic-info');
+});
+
 Route::post('/basic-info', function (Request $request) {
     if(session()->has('student_email')) {
         $student_name = $request->input('student_name');
